@@ -30,7 +30,7 @@ do {
         case 1:
             createTwoMatrix();
             console.log("This is case 1");
-            if (validateArray()) {
+            if (validateTwoArray()) {
                 addition();
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
@@ -39,7 +39,7 @@ do {
         case 2:
             createTwoMatrix();
             console.log("This is case 2");
-            if (validateArray()) {
+            if (validateTwoArray()) {
                 subtraction();
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
@@ -48,15 +48,17 @@ do {
         case 3:
             createOneMatrix();
             console.log("This is case 3");
-            if (validateArray()) {
+            if (validateOneArray) {
                 diagonal();
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
             break;
         case 4:
-            if (validateArray()) {
-                transpose();
+            createOneMatrix();
+            console.log("This is case 4");
+            if (validateOneArray) {
+                transpose(array1, array1.length);
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
@@ -132,10 +134,21 @@ function diagonal() {
 }
 
 
-function transpose() {
+function transpose(array, arrayLength) {
     console.log("Transpose");
-}
+    var newArray = [];
+    for (var i = 0; i < array.length; i++) {
+        newArray.push([]);
+    };
 
+    for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < arrayLength; j++) {
+            newArray[j].push(array[i][j]);
+        };
+    };
+
+    console.log(newArray);
+}
 
 var rows = 0, columns = 0;
 function createMatrix(array, num) {
@@ -160,7 +173,7 @@ function createMatrix(array, num) {
 
 //todo
 var countElements1, countElements2 = 0;
-function validateArray() {
+function validateTwoArray() {
     console.log(array1.length);
     console.log(array2.length);
     var isLengthEqual = false;
@@ -169,6 +182,17 @@ function validateArray() {
     }
     return isLengthEqual;
 
+}
+
+function validateOneArray() {
+
+    var numberOfRows = array1.length // row
+    var numberOfColumns = array1[0].length // col
+    if (numberOfRows === numberOfColumns) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
