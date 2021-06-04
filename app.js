@@ -1,8 +1,13 @@
 const readline = require("readline-sync");
 var clc = require("cli-color");
+var addition = require('./lib/addition.js');
+var subtraction = require('./lib/subtraction.js');
+var diagonal = require('./lib/diagonal.js');
+var transpose = require('./lib/transpose.js');
+
 var input;
 var take = '', valid = false;
-var array1 = [], array2 = [], sum = [], sub = [], majorD = [], minorD = [];
+var array1 = [], array2 = [];
 
 
 function menu() {
@@ -19,7 +24,7 @@ function menu() {
     });
 }
 do {
-    array1 = [], array2 = [], sum = [], sub = [], valid = false;
+    array1 = [], array2 = [], valid = false;
     menu();
     input = readline.questionInt(clc.yellowBright("Enter Your Option: "));
 
@@ -31,7 +36,7 @@ do {
             createTwoMatrix();
             console.log("This is case 1");
             if (validateTwoArray()) {
-                addition();
+                addition(array1, array2, rows, columns);
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
@@ -40,7 +45,7 @@ do {
             createTwoMatrix();
             console.log("This is case 2");
             if (validateTwoArray()) {
-                subtraction();
+                subtraction(array1, array2, rows, columns);
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
@@ -49,7 +54,7 @@ do {
             createOneMatrix();
             console.log("This is case 3");
             if (validateOneArray()) {
-                diagonal();
+                diagonal(array1);
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
@@ -101,57 +106,6 @@ function useRegex(input) {
     // let regex = /^Y | y | N | n$/i;
     let regex = /^[Y|y|N|n]?$/i;
     return regex.test(input);
-}
-
-function addition() {
-    console.log("Addition");
-    for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < columns; j++) {
-            sum.push(array1[i][j] + array2[i][j]);
-        }
-    }
-    console.log(sum);
-}
-function subtraction() {
-    console.log("Subtraction");
-    for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < columns; j++) {
-            sub.push(array1[i][j] - array2[i][j]);
-        }
-    }
-    console.log(sub);
-}
-function diagonal() {
-    console.log("Diagonal");
-    const size = array1.length - 1;
-    for (var i = 0; i < size + 1; i++) {
-        // major diagonal
-        // console.log(array1[i][i]);
-        majorD.push(array1[i][i]);
-        //   minor diagonal
-        // console.log(array1[i][size - i]);
-        minorD.push(array1[i][size - i]);
-    }
-    console.log("Major Diagonal : " + majorD);
-    console.log("Minor Diagonal : " + minorD);
-
-}
-
-
-function transpose(array, arrayLength) {
-    console.log("Transpose");
-    var newArray = [];
-    for (var i = 0; i < array.length; i++) {
-        newArray.push([]);
-    };
-
-    for (var i = 0; i < array.length; i++) {
-        for (var j = 0; j < arrayLength; j++) {
-            newArray[j].push(array[i][j]);
-        };
-    };
-
-    console.log(newArray);
 }
 
 var rows = 0, columns = 0;
