@@ -1,6 +1,10 @@
 const readline = require("readline-sync");
 var clc = require("cli-color");
 var input;
+var take = '', valid = false;
+var array1 = [], array2 = [], sum = [], sub = [], majorD = [], minorD = [];
+
+
 function menu() {
     console.log("-------------");
     var options = [
@@ -14,8 +18,6 @@ function menu() {
         console.log(clc.magentaBright(`${index}. ${elem}`));
     });
 }
-var take = '', valid = false;
-var array1 = [], array2 = [], sum = [], sub = [];
 do {
     array1 = [], array2 = [], sum = [], sub = [], valid = false;
     menu();
@@ -28,18 +30,36 @@ do {
         case 1:
             createTwoMatrix();
             console.log("This is case 1");
-            addition();
+            if (validateArray()) {
+                addition();
+            } else {
+                console.log(clc.yellowBright("Not a square matrix"));
+            }
             break;
         case 2:
             createTwoMatrix();
             console.log("This is case 2");
-            subtraction();
+            if (validateArray()) {
+                subtraction();
+            } else {
+                console.log(clc.yellowBright("Not a square matrix"));
+            }
             break;
         case 3:
-            diagonal();
+            createOneMatrix();
+            console.log("This is case 3");
+            if (validateArray()) {
+                diagonal();
+            } else {
+                console.log(clc.yellowBright("Not a square matrix"));
+            }
             break;
         case 4:
-            transpose();
+            if (validateArray()) {
+                transpose();
+            } else {
+                console.log(clc.yellowBright("Not a square matrix"));
+            }
             break;
         default:
             console.log(clc.yellowBright("Invalid Option"))
@@ -64,6 +84,12 @@ function createTwoMatrix() {
     array2 = createMatrix(array2, 2);
     console.log(array2);
 }
+
+function createOneMatrix() {
+    array1 = createMatrix(array1, 1);
+    console.log(array1);
+}
+
 // console.log(useRegex("y"))
 function useRegex(input) {
     // let regex = /^Y | y | N | n$/i;
@@ -84,24 +110,33 @@ function subtraction() {
     console.log("Subtraction");
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < columns; j++) {
-            sum.push(array1[i][j] - array2[i][j]);
+            sub.push(array1[i][j] - array2[i][j]);
         }
     }
+    console.log(sub);
 }
 function diagonal() {
     console.log("Diagonal");
+    const size = array1.length - 1;
+    for (var i = 0; i < size + 1; i++) {
+        // major diagonal
+        // console.log(array1[i][i]);
+        majorD.push(array1[i][i]);
+        //   minor diagonal
+        // console.log(array1[i][size - i]);
+        minorD.push(array1[i][size - i]);
+    }
+    console.log("Major Diagonal : " + majorD);
+    console.log("Minor Diagonal : " + minorD);
+
 }
+
 
 function transpose() {
     console.log("Transpose");
 }
 
 
-// Hackathon 1 (Team Work)// :Build a Menu Driven CLI app with Javascript to performMatrix Operations and stop the programexecution only upon selection. Keep displaying themenu after the task
-//is done until the userchooses to exit.
-//Menu Options :1) Matrix Addition2) Matrix Subtraction3) Extract Matrix Diagonal4) Matrix Transpose0) Exit the programNote :All the matrix inputs should be given as command linei nputs including matrix dimensions.
-// const q1 = readline.question("What do you like?");// console.log("He likes " + q1);
-// const number = readline.questionInt("Give me a number: ");
 var rows = 0, columns = 0;
 function createMatrix(array, num) {
     rows = readline.questionInt(
@@ -124,7 +159,15 @@ function createMatrix(array, num) {
 }
 
 //todo
-function validateArray(array1, array2) {
+var countElements1, countElements2 = 0;
+function validateArray() {
+    console.log(array1.length);
+    console.log(array2.length);
+    var isLengthEqual = false;
+    if (array1.length === array2.length) {
+        isLengthEqual = true;
+    }
+    return isLengthEqual;
 
 }
 
