@@ -48,7 +48,7 @@ do {
         case 3:
             createOneMatrix();
             console.log("This is case 3");
-            if (validateOneArray) {
+            if (validateOneArray()) {
                 diagonal();
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
@@ -57,7 +57,7 @@ do {
         case 4:
             createOneMatrix();
             console.log("This is case 4");
-            if (validateOneArray) {
+            if (validateOneArray()) {
                 transpose(array1, array1.length);
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
@@ -69,16 +69,20 @@ do {
     }
     take = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
     console.clear();
+    valid = validInputYorN(take);
+} while (valid)
+
+function validInputYorN(take) {
     if (useRegex(take)) {
         if (take === 'Y' || take === 'y')
-            valid = true;
+            return true;
     } else if (take === 'N' || take === 'n')
-        valid = false;
+        return false;
     else {
         console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
-        valid = true;
+        return true;
     }
-} while (valid)
+}
 
 function createTwoMatrix() {
     array1 = createMatrix(array1, 1);
@@ -174,8 +178,8 @@ function createMatrix(array, num) {
 //todo
 var countElements1, countElements2 = 0;
 function validateTwoArray() {
-    console.log(array1.length);
-    console.log(array2.length);
+    // console.log(array1.length);
+    // console.log(array2.length);
     var isLengthEqual = false;
     if (array1.length === array2.length) {
         isLengthEqual = true;
@@ -194,29 +198,5 @@ function validateOneArray() {
         return false;
     }
 }
-
-
-// switch (number) {
-//     case 1:
-//         array1 = createMatrix(array1);
-//         console.log(array1);
-//         array2 = createMatrix(array2);
-//         console.log(array2);
-//         console.log("This is case 1");
-
-
-//         for (var i = 0; i < rows; i++) {
-//             for (var j = 0; j < columns; j++) {
-//                 sum.push(array1[i][j] + array2[i][j]);
-//             }
-//         }
-//         console.log(sum);
-//         break;
-//     case 2:
-//         console.log("this is case 2");
-//         break;
-//     default:
-//         console.log("hi");
-// }
 
 
