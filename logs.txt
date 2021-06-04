@@ -1,0 +1,20 @@
+-------------
+0. Exit the Program
+1. Matrix Addition
+2. Matrix Subtraction
+3. Matrix Diagonal
+4. Matrix Transpose
+[ [ 1 ] ]
+[ [ 1 ] ]
+This is case 1
+[ 2 ]
+-------------
+0. Exit the Program
+1. Matrix Addition
+2. Matrix Subtraction
+3. Matrix Diagonal
+4. Matrix Transpose
+[ [ 1 ] ]
+[ [ 1 ] ]
+This is case 1
+[ 2 ]

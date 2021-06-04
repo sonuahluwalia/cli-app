@@ -1,0 +1,17 @@
+{
+  "name": "cli-app",
+  "version": "1.0.0",
+  "description": "CLI App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "logs": "cat logs.txt",
+    "io": "npm start && npm run logs"
+  },
+  "author": "Sonu Ahluwalia",
+  "license": "ISC",
+  "dependencies": {
+    "cli-color": "^2.0.0",
+    "readline-sync": "^1.4.10"
+  }
+}
