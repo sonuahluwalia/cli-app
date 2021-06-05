@@ -7,8 +7,7 @@ var addition = require('./lib/addition.js');
 var subtraction = require('./lib/subtraction.js');
 var diagonal = require('./lib/diagonal.js');
 var transpose = require('./lib/transpose.js');
-var print2DArray = require('./lib/print.js');
-var print1DArray = require('./lib/print.js');
+var print = require('./lib/print.js');
 
 
 var input;
@@ -46,7 +45,7 @@ function main() {
                 // console.log(array2.length);
                 if (validateTwoArray(array1, array2)) {
                     // var sum = addition(array1, array2, rows, columns);
-                    print2DArray(addition(array1, array2, rows, columns));
+                    print.print2DArray(addition(array1, array2, rows, columns));
                 } else {
                     console.log(clc.yellowBright("Not a square matrix"));
                 }
@@ -55,7 +54,7 @@ function main() {
                 createTwoMatrix();
                 // console.log("This is case 2");
                 if (validateTwoArray(array1, array2)) {
-                    print2DArray(subtraction(array1, array2, rows, columns));
+                    print.print2DArray(subtraction(array1, array2, rows, columns));
                 } else {
                     console.log(clc.yellowBright("Not a square matrix"));
                 }
@@ -66,9 +65,9 @@ function main() {
                 if (validateOneArray(array1)) {
                     var obj = diagonal(array1);
                     console.log(clc.blueBright("Major Diagonal"));
-                    print1DArray(obj.MajorDiagonal);
+                    print.print1DArray(obj.MajorDiagonal);
                     console.log(clc.blueBright("Minor Diagonal"));
-                    print1DArray(obj.MinorDiagonal);
+                    print.print1DArray(obj.MinorDiagonal);
 
                 } else {
                     console.log(clc.yellowBright("Not a square matrix"));
@@ -78,7 +77,7 @@ function main() {
                 createOneMatrix();
                 // console.log("This is case 4");
                 if (validateOneArray(array1)) {
-                    print2DArray(transpose(array1, array1.length));
+                    print.print2DArray(transpose(array1, array1.length));
                 } else {
                     console.log(clc.yellowBright("Not a square matrix"));
                 }
@@ -97,14 +96,14 @@ function main() {
 // array creation and fill array
 function createTwoMatrix() {
     array1 = createMatrix(array1, 1);
-    print2DArray(array1);
+    print.print2DArray(array1);
     array2 = createMatrix(array2, 2);
-    print2DArray(array2);
+    print.print2DArray(array2);
 }
 
 function createOneMatrix() {
     array1 = createMatrix(array1, 1);
-    print2DArray(array1);
+    print.print2DArray(array1);
 }
 
 
