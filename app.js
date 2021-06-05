@@ -77,32 +77,35 @@ do {
     console.clear();
 } while (valid)
 
+
 function validInputYorN(take) {
     var input = "";
     if (useRegex(take)) {
         if (take === 'Y' || take === 'y') {
             console.log(take);
             return true;
+        } else if (take === 'N' || take === 'n') {
+            console.log(take)
+            return false;
         }
-    } else if (take === 'N' || take === 'n') {
-        console.log(take)
-        return false;
-    }
-    else {
-        console.log(take)
-        console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
-        input = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
+    } else {
+        input = otherInput(take);
         validInputYorN(input);
-        //return true;
     }
+}
+function otherInput(take) {
+    console.log(take)
+    console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
+    input = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
+    return input;
 }
 
 // console.log(useRegex("y"))
-function useRegex(input) {
-    // let regex = /^Y | y | N | n$/i;
-    let regex = /^[Y|y|N|n]?$/i;
-    return regex.test(input);
-}
+// function useRegex(input) {
+//     // let regex = /^Y | y | N | n$/i;
+//     let regex = /^[Y|y|N|n]?$/i;
+//     return regex.test(input);
+// }
 
 function createTwoMatrix() {
     array1 = createMatrix(array1, 1);
@@ -120,6 +123,10 @@ function createOneMatrix() {
 function useRegex(input) {
     // let regex = /^Y | y | N | n$/i;
     let regex = /^[Y|y|N|n]?$/i;
+    // let blankregex = /^$/;
+    // if (input.length === 0)
+    //     return !blankregex.test(input);
+    // else
     return regex.test(input);
 }
 
