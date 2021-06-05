@@ -1,9 +1,15 @@
+// This is the main file acting as controller with the main function and
+// validation and matrix creation logic
+
 const readline = require("readline-sync");
 var clc = require("cli-color");
 var addition = require('./lib/addition.js');
 var subtraction = require('./lib/subtraction.js');
 var diagonal = require('./lib/diagonal.js');
 var transpose = require('./lib/transpose.js');
+var print2DArray = require('./lib/print.js');
+var print1DArray = require('./lib/print.js');
+
 
 var input;
 var take = '', valid = false;
@@ -35,8 +41,10 @@ function main() {
                 return;
             case 1:
                 createTwoMatrix();
-                // console.log("This is case 1");
-                if (validateTwoArray()) {
+                console.log("This is case 1");
+                // console.log(array1.length);
+                // console.log(array2.length);
+                if (validateTwoArray(array1, array2)) {
                     // var sum = addition(array1, array2, rows, columns);
                     print2DArray(addition(array1, array2, rows, columns));
                 } else {
@@ -46,7 +54,7 @@ function main() {
             case 2:
                 createTwoMatrix();
                 // console.log("This is case 2");
-                if (validateTwoArray()) {
+                if (validateTwoArray(array1, array2)) {
                     print2DArray(subtraction(array1, array2, rows, columns));
                 } else {
                     console.log(clc.yellowBright("Not a square matrix"));
@@ -55,7 +63,7 @@ function main() {
             case 3:
                 createOneMatrix();
                 // console.log("This is case 3");
-                if (validateOneArray()) {
+                if (validateOneArray(array1)) {
                     var obj = diagonal(array1);
                     console.log(clc.blueBright("Major Diagonal"));
                     print1DArray(obj.MajorDiagonal);
@@ -69,7 +77,7 @@ function main() {
             case 4:
                 createOneMatrix();
                 // console.log("This is case 4");
-                if (validateOneArray()) {
+                if (validateOneArray(array1)) {
                     print2DArray(transpose(array1, array1.length));
                 } else {
                     console.log(clc.yellowBright("Not a square matrix"));
@@ -85,54 +93,8 @@ function main() {
     } while (valid)
 
 }
-function print2DArray(array) {
-    var arrayRow = '';
-    for (var i = 0; i < array.length; i++) {
-        for (var j = 0; j < array[i].length; j++) {
-            arrayRow += (array[i][j]) + ' ';
-        }
-        console.log(arrayRow);
-        arrayRow = '';
-    }
-}
 
-function print1DArray(array) {
-    var arrayRow = '';
-    for (var i = 0; i < array.length; i++) {
-        arrayRow += array[i] + " ";
-    }
-    console.log(arrayRow);
-}
-
-function validInputYorN(take) {
-    var input = "";
-    if (useRegex(take)) {
-        if (take === 'Y' || take === 'y') {
-            console.log(take);
-            return true;
-        } else if (take === 'N' || take === 'n') {
-            console.log(take)
-            return false;
-        }
-    } else {
-        input = otherInput(take);
-        validInputYorN(input);
-    }
-}
-function otherInput(take) {
-    console.log(take)
-    console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
-    input = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
-    return input;
-}
-
-// console.log(useRegex("y"))
-// function useRegex(input) {
-//     // let regex = /^Y | y | N | n$/i;
-//     let regex = /^[Y|y|N|n]?$/i;
-//     return regex.test(input);
-// }
-
+// array creation and fill array
 function createTwoMatrix() {
     array1 = createMatrix(array1, 1);
     print2DArray(array1);
@@ -145,16 +107,6 @@ function createOneMatrix() {
     print2DArray(array1);
 }
 
-// console.log(useRegex("y"))
-function useRegex(input) {
-    // let regex = /^Y | y | N | n$/i;
-    let regex = /^[Y|y|N|n]?$/i;
-    // let blankregex = /^$/;
-    // if (input.length === 0)
-    //     return !blankregex.test(input);
-    // else
-    return regex.test(input);
-}
 
 var rows = 0, columns = 0;
 function createMatrix(array, num) {
@@ -177,18 +129,52 @@ function createMatrix(array, num) {
     return array;
 }
 
-function validateTwoArray() {
+// Validation code below
+
+function validInputYorN(take) {
+    var input = "";
+    if (useRegex(take)) {
+        if (take === 'Y' || take === 'y') {
+            console.log(take);
+            return true;
+        } else if (take === 'N' || take === 'n') {
+            console.log(take)
+            return false;
+        }
+    } else {
+        input = otherInput(take);
+        validInputYorN(input);
+    }
+}
+function otherInput(take) {
+    console.log(take)
+    console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
+    input = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
+    return input;
+}
+// console.log(useRegex("y"))
+function useRegex(input) {
+    // let regex = /^Y | y | N | n$/i;
+    let regex = /^[Y|y|N|n]?$/i;
+    // let blankregex = /^$/;
+    // if (input.length === 0)
+    //     return !blankregex.test(input);
+    // else
+    return regex.test(input);
+}
+function validateTwoArray(array1, array2) {
     // console.log(array1.length);
     // console.log(array2.length);
+    // console.log("I am in validate two array");
     var isLengthEqual = false;
-    if (array1.length === array2.length) {
+    if (array1.length == array2.length) {
         isLengthEqual = true;
     }
     return isLengthEqual;
 
 }
 
-function validateOneArray() {
+function validateOneArray(array1) {
 
     var numberOfRows = array1.length // row
     var numberOfColumns = array1[0].length // col
