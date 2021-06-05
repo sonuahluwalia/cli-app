@@ -34,36 +34,42 @@ do {
             return;
         case 1:
             createTwoMatrix();
-            console.log("This is case 1");
+            // console.log("This is case 1");
             if (validateTwoArray()) {
-                addition(array1, array2, rows, columns);
+                // var sum = addition(array1, array2, rows, columns);
+                print2DArray(addition(array1, array2, rows, columns));
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
             break;
         case 2:
             createTwoMatrix();
-            console.log("This is case 2");
+            // console.log("This is case 2");
             if (validateTwoArray()) {
-                subtraction(array1, array2, rows, columns);
+                print2DArray(subtraction(array1, array2, rows, columns));
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
             break;
         case 3:
             createOneMatrix();
-            console.log("This is case 3");
+            // console.log("This is case 3");
             if (validateOneArray()) {
-                diagonal(array1);
+                var obj = diagonal(array1);
+                console.log(clc.blueBright("Major Diagonal"));
+                print1DArray(obj.MajorDiagonal);
+                console.log(clc.blueBright("Minor Diagonal"));
+                print1DArray(obj.MinorDiagonal);
+
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
             break;
         case 4:
             createOneMatrix();
-            console.log("This is case 4");
+            // console.log("This is case 4");
             if (validateOneArray()) {
-                transpose(array1, array1.length);
+                print2DArray(transpose(array1, array1.length));
             } else {
                 console.log(clc.yellowBright("Not a square matrix"));
             }
@@ -77,6 +83,24 @@ do {
     console.clear();
 } while (valid)
 
+function print2DArray(array) {
+    var arrayRow = '';
+    for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < array[i].length; j++) {
+            arrayRow += (array[i][j]) + ' ';
+        }
+        console.log(arrayRow);
+        arrayRow = '';
+    }
+}
+
+function print1DArray(array) {
+    var arrayRow = '';
+    for (var i = 0; i < array.length; i++) {
+        arrayRow += array[i] + " ";
+    }
+    console.log(arrayRow);
+}
 
 function validInputYorN(take) {
     var input = "";
@@ -109,14 +133,14 @@ function otherInput(take) {
 
 function createTwoMatrix() {
     array1 = createMatrix(array1, 1);
-    console.log(array1);
+    print2DArray(array1);
     array2 = createMatrix(array2, 2);
-    console.log(array2);
+    print2DArray(array2);
 }
 
 function createOneMatrix() {
     array1 = createMatrix(array1, 1);
-    console.log(array1);
+    print2DArray(array1);
 }
 
 // console.log(useRegex("y"))
@@ -132,19 +156,19 @@ function useRegex(input) {
 
 var rows = 0, columns = 0;
 function createMatrix(array, num) {
-    rows = readline.questionInt(
+    rows = readline.questionInt(clc.blueBright(
         "How many rows do you want for your " + num + " matrix to have? "
-    );
-    columns = readline.questionInt(
+    ));
+    columns = readline.questionInt(clc.blueBright(
         "How many columns do you want for your  " + num + " matrix to have? "
-    );
+    ));
 
     for (var i = 0; i < rows; i++) {
         array.push([]);
     }
     for (var i = 0; i < rows; i++) {
         for (var j = 0; j < columns; j++) {
-            array[i][j] = readline.questionInt(`Value in ${i} and ${j} = `);
+            array[i][j] = readline.questionInt(clc.greenBright(`Value in ${i} and ${j} = `));
         }
     }
     // console.log(array);
