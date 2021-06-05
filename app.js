@@ -73,20 +73,35 @@ do {
             break;
     }
     take = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
-    console.clear();
     valid = validInputYorN(take);
+    console.clear();
 } while (valid)
 
 function validInputYorN(take) {
+    var input = "";
     if (useRegex(take)) {
-        if (take === 'Y' || take === 'y')
+        if (take === 'Y' || take === 'y') {
+            console.log(take);
             return true;
-    } else if (take === 'N' || take === 'n')
+        }
+    } else if (take === 'N' || take === 'n') {
+        console.log(take)
         return false;
-    else {
-        console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
-        return true;
     }
+    else {
+        console.log(take)
+        console.log(clc.yellowBright("Invalid Option. Please choose (y/n)"));
+        input = readline.question(clc.yellowBright("Do you want to continue(y/n) : "));
+        validInputYorN(input);
+        //return true;
+    }
+}
+
+// console.log(useRegex("y"))
+function useRegex(input) {
+    // let regex = /^Y | y | N | n$/i;
+    let regex = /^[Y|y|N|n]?$/i;
+    return regex.test(input);
 }
 
 function createTwoMatrix() {
