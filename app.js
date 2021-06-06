@@ -28,7 +28,6 @@ function menu() {
         console.log(clc.magentaBright(`${index}. ${elem}`));
     });
 }
-main();
 function main() {
     do {
         array1 = [], array2 = [], valid = false;
@@ -94,6 +93,7 @@ function main() {
     } while (valid)
 
 }
+main();
 
 
 
