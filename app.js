@@ -42,7 +42,7 @@ function main() {
                 return;
             case 1:
                 create.createTwoMatrix(array1, array2);
-                console.log("This is case 1");
+                // console.log("This is case 1");
                 // console.log(array1.length);
                 // console.log(array2.length);
                 if (validate.validateTwoArray(array1, array2)) {
